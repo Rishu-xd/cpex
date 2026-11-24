@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPex GitHub Bridge</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="header">
+      <div class="brand">
+        <img src="icons/icon48.png" alt="CPex logo" class="brand-logo" width="28" height="28" />
+        <div>
+          <div class="title">CPex GitHub Bridge</div>
+          <div class="subtitle">Local Extension Vault</div>
+        </div>
+      </div>
+      <span id="statusPill" class="pill pill-idle">Not connected</span>
+    </header>
+
+    <div id="feedback" class="feedback hidden"></div>
+
+    <section class="card">
+      <div class="card-title">1. Paste .env File Contents</div>
+      <p class="hint">
+        Paste lines from your <code>.env</code> / <code>.env.local</code> (<code>GITHUB_TOKEN</code>, <code>GITHUB_CLIENT_ID</code>, <code>GITHUB_CLIENT_SECRET</code>, <code>NEXT_PUBLIC_APP_URL</code>).
+      </p>
+      <textarea
+        id="envInput"
+        rows="4"
+        placeholder="GITHUB_TOKEN=ghp_...&#10;GITHUB_CLIENT_ID=...&#10;GITHUB_CLIENT_SECRET=...&#10;NEXT_PUBLIC_APP_URL=http://localhost:3000"
+      ></textarea>
+      <button id="importEnvBtn" class="btn btn-primary">Import .env &amp; Save</button>
+    </section>
+
+    <section class="card">
+      <div class="card-title">2. Direct GitHub Token (PAT)</div>
+      <p class="hint">
+        Use a Personal Access Token with <code>repo</code> scope for zero-setup commits.
+      </p>
+      <input
+        id="tokenInput"
+        type="password"
+        placeholder="ghp_... (leave blank to keep stored token)"
+      />
+      <div class="row">
+        <button id="saveTokenBtn" class="btn btn-secondary">Save &amp; Verify Token</button>
+        <button id="testBtn" class="btn btn-ghost">Test</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">3. GitHub OAuth App (Optional)</div>
+      <input id="clientIdInput" type="text" placeholder="GITHUB_CLIENT_ID" />
+      <input
+        id="clientSecretInput"
+        type="password"
+        placeholder="GITHUB_CLIENT_SECRET (blank keeps stored)"
+      />
+      <div class="redirect-row">
+        <span class="redirect-label">OAuth Callback:</span>
+        <code id="redirectUrl" class="redirect-url"></code>
+      </div>
+      <button id="oauthBtn" class="btn btn-secondary">Sign in via GitHub OAuth</button>
+    </section>
+
+    <section class="card">
+      <div class="card-title">Allowed App Origins</div>
+      <ul id="originsList" class="origins-list"></ul>
+      <div class="row">
+        <input id="originInput" type="text" placeholder="https://your-cpex.app" />
+        <button id="addOriginBtn" class="btn btn-ghost">Add</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <button id="clearBtn" class="btn btn-danger">Clear Stored Secrets</button>
+    </footer>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
